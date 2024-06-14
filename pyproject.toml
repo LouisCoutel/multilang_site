@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "multilang-site"
+version = "0.1.0"
+description = "Online publishing platform with multiple languages support and I.A features"
+authors = ["LouisCoutel <louiscoutel75@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+SQLAlchemy = "^2.0.30"
+django-htmx = "^1.17.3"
+Django = "^5.0.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
