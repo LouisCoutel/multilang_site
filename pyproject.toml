@@ -7,9 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-SQLAlchemy = "^2.0.30"
 django-htmx = "^1.17.3"
 Django = "^5.0.6"
+django-template-partials = "^24.2"
+faker = "^25.8.0"
 
 
 [build-system]

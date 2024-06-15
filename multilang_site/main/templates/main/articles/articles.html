@@ -1,0 +1,14 @@
+{% load partials %}
+{% partialdef article_card %}
+<article>
+    <h2>{{ article.title }}</h2>
+    <h3>{{ article.publication_date }}</h3>
+    <p>{{ article.content }}</p>
+</article>
+{% endpartialdef %}
+
+<section>
+    {% for article in articles %}
+        {% partial article_card %}
+    {% endfor %}
+</section>
