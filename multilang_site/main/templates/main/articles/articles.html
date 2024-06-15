@@ -6,9 +6,14 @@
     <p>{{ article.content }}</p>
 </article>
 {% endpartialdef %}
-
 <section>
     {% for article in articles %}
         {% partial article_card %}
     {% endfor %}
+    <footer hx-get="/articles/?page={{ next_page }}"
+            hx-trigger="revealed"
+            hx-swap="outerHTML"
+            hx-push-url="true">
+        Load more
+    </footer>
 </section>
