@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-17 15:05+0200\n"
+"POT-Creation-Date: 2024-06-17 20:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,50 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:8
+#: models.py:16
 msgid "title"
 msgstr "titre"
 
-#: models.py:9
+#: models.py:17
 msgid "content"
 msgstr "contenu"
 
-#: models.py:10
+#: models.py:18
 msgid "publication_date"
 msgstr "date_publication"
 
-#: models.py:14
+#: models.py:22
 msgid "article"
 msgstr "article"
 
-#: models.py:15
+#: models.py:23
 msgid "articles"
 msgstr "articles"
 
-#: templates/main/articles/articles.html:6
+#: templates/main/articles/articles.html:7
 msgid "Publication date"
 msgstr "Date de publication"
 
-#: templates/main/articles/articles.html:19
+#: templates/main/articles/articles.html:16
+msgid "Latest articles"
+msgstr "Derniers articles"
+
+#: templates/main/articles/articles.html:26
 msgid "Load more articles"
 msgstr "Charger plus d'articles"
 
-#: templates/main/articles/reached_end.html:2
+#: templates/main/articles/reached_end.html:3
 msgid "No more articles to load"
 msgstr "Tout les articles ont été chargés"
+
+#: templates/main/base_layout.html:9
+msgid "Online publishing platform with multiple languages support and I.A features"
+msgstr "Plateforme de blog supportant plusieurs langues et intégrant des fonctionnalités basées sur l'I.A"
+
+#: templates/main/base_layout.html:20
+msgid "Select language"
+msgstr "Sélectionnez la langue"
+
+#: templates/main/base_layout.html:32
+msgid "Set"
+msgstr "Sélectionner"

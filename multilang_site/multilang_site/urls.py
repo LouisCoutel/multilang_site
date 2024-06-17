@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from main import views
 
-urlpatterns = i18n_patterns(
+urlpatterns = [path('i18n/', include("django.conf.urls.i18n"))]
+
+urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('main/', views.base),
     path('articles/', views.ArticlesView.as_view())

@@ -2,18 +2,24 @@
 {% load i18n %}
 {% partialdef article_card %}
 <article>
-    <h2>{{ article.title }}</h2>
-    <h3>{% trans "Publication date" %}:</h3>
-    <p>{{ article.publication_date }}</p>
-    <p>{{ article.content }}</p>
+    <header class="article_header">
+        <h2>{{ article.title }}</h2>
+        <h3>{% trans "Publication date" %}: {{ article.publication_date }}</h3>
+    </header>
+    <section class="content">
+        <p>{{ article.content }}</p>
+    </section>
 </article>
 {% endpartialdef %}
-<section>
-    {% get_current_language as LANGUAGE_CODE %}
+<section class="articles">
+    <header class="articles_header">
+        <h1>{% trans "Latest articles" %}</h1>
+    </header>
     {% for article in articles %}
         {% partial article_card %}
     {% endfor %}
-    <footer hx-get="/articles/?page={{ next_page }}"
+    <footer class="articles_footer"
+            hx-get="/articles/?page={{ next_page }}"
             hx-trigger="revealed"
             hx-swap="outerHTML"
             hx-push-url="true">
