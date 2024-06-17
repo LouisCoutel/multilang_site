@@ -1,12 +1,15 @@
 {% load partials %}
+{% load i18n %}
 {% partialdef article_card %}
 <article>
     <h2>{{ article.title }}</h2>
-    <h3>{{ article.publication_date }}</h3>
+    <h3>{% trans "Publication date" %}:</h3>
+    <p>{{ article.publication_date }}</p>
     <p>{{ article.content }}</p>
 </article>
 {% endpartialdef %}
 <section>
+    {% get_current_language as LANGUAGE_CODE %}
     {% for article in articles %}
         {% partial article_card %}
     {% endfor %}
@@ -14,6 +17,6 @@
             hx-trigger="revealed"
             hx-swap="outerHTML"
             hx-push-url="true">
-        Load more
+        {% trans "Load more articles" %}
     </footer>
 </section>
