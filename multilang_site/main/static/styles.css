@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+
+html * {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  --alert-red: #bf1a2f;
+  --warning-yellow: #f7d002;
+  --light-gray: #cfd7c7;
+  --dark-blue: #0c4767;
+  --ok-green: #018e42;
+  --bg-gradient: hsla(201, 53%, 62%, 1);
+  --off-black: #1b1b1b;
+  color: var(--off-black);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  all: unset;
+  margin-bottom: 1rem;
+  font-family: Urbanist, sans-serif;
+}
+
+h1 {
+  font-size: 3.815rem;
+}
+
+h2 {
+  font-size: 3.052rem;
+}
+
+h3 {
+  font-size: 2.441rem;
+}
+
+h4 {
+  font-size: 1.953rem;
+}
+
+h5 {
+  font-size: 1.563rem;
+}
+
+h6 {
+  font-size: 1.25rem;
+}
+
+body {
+  background: var(--bg-gradient);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+body > header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 999;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: right;
+  filter: drop-shadow(0px 2px 2px #cfd7c7);
+}
+p {
+  all: unset;
+  margin-bottom: 0.5rem;
+}
+
+p,
+li {
+  max-width: 75ch;
+}
+
+li {
+  margin-bottom: 1rem;
+}
+
+select {
+  border-radius: 0.2rem;
+  border: none;
+  padding: 0.2rem 0.5rem;
+}
+
+.articles {
+  display: flex;
+  width: 100ch;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2em;
+}
+
+.articles_footer,
+article,
+.articles_header {
+  background-color: white;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  filter: drop-shadow(0px 4px 6px #343434);
+}
+
+
+article {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.article_header {
+  display: flex;
+  flex-direction: column;
+}
+
+article > .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.articles_footer {
+  font-size: 1.563rem;
+}
+

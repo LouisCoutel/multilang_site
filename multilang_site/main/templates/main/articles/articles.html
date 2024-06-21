@@ -3,17 +3,17 @@
 {% partialdef article_card %}
 <article>
     <header class="article_header">
-        <h2>{{ article.title }}</h2>
-        <h3>{% trans "Publication date" %}: {{ article.publication_date }}</h3>
+        <h3>{{ article.title }}</h3>
+        <h4>{% trans "Publication date" %}: {{ article.publication_date }}</h4>
     </header>
     <section class="content">
-        <p>{{ article.content }}</p>
+        {{ article.content | safe }}
     </section>
 </article>
 {% endpartialdef %}
 <section class="articles">
     <header class="articles_header">
-        <h1>{% trans "Latest articles" %}</h1>
+        <h2>{% trans "Latest articles" %}</h2>
     </header>
     {% for article in articles %}
         {% partial article_card %}
