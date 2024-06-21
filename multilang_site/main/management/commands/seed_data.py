@@ -22,13 +22,15 @@ def generate_data(prompt_word: str):
         content_fr (str): Content translated in french.
     """
 
+    system_prompt = "You are a tasked with generating dummy data for a blog platform, you can write realistic articles like a regular internet user would. You can format text using HTML tags, so that it can be injected in a template."
+
     completion_0 = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "You are a tasked with generating dummy data for a blog platform, you can write realistic articles like a regular internet user would."},
+             "content": system_prompt},
             {"role": "user",
-             "content": f"Write the title for a blog post about {prompt_word}, the title should not exceed 200 characters."}
+             "content": f"Write the title for a blog post about {prompt_word}, the title should not exceed 150 characters, and should not be wrapped in quotes."}
         ]
     )
 
@@ -38,9 +40,9 @@ def generate_data(prompt_word: str):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "You are a tasked with generating dummy data for a blog platform, you can write realistic articles like a regular internet user would."},
+             "content": system_prompt},
             {"role": "user",
-             "content": f"Write a blog post based on the following title: {title}"}
+             "content": f"Write a blog post based on the following title: {title}, wrap all the paragraphs and lists in appropriate HTML elements. If you use headings, only '<h5>' or lower are allowed. Don't include the title and don't wrap the final result in any element."}
         ]
     )
 
@@ -50,7 +52,7 @@ def generate_data(prompt_word: str):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "You are a tasked with generating dummy data for a blog platform, you can write realistic articles like a regular internet user would."},
+             "content": system_prompt},
             {"role": "user",
              "content": f"Translate the following title in french: {title}"}
         ]
@@ -62,9 +64,9 @@ def generate_data(prompt_word: str):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-             "content": "You are a tasked with generating dummy data for a blog platform, you can write realistic articles like a regular internet user would."},
+             "content": system_prompt},
             {"role": "user",
-             "content": f"Translate the following blog post in french: {content}"}
+             "content": f"Translate the following blog post in french: {content}, wrap all the paragraphs and lists in appropriate HTML elements. If you use headings, only '<h5>' or lower are allowed. Don't include the title and don't wrap the final result in any element."}
         ]
     )
 
