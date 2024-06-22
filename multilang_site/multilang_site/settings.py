@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_htmx',
     'modeltranslation',
     'template_partials',
+    'pgvector',
     'main'
 ]
 
@@ -93,6 +94,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'multilang_db',
+        'USER': 'admin',
+        'PASSWORD': 'pwd',
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
 }
 
