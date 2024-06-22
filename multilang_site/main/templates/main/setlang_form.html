@@ -1,0 +1,15 @@
+{% load i18n %}
+<form hx-post="/i18n/setlang/">
+    {% csrf_token %}
+    <input inert name="next" type="hidden" value="/main/">
+    <label hidden for="language">{% trans "Select language" %}:</label>
+    <select name="language" id="language">
+        {% for language in languages %}
+            <option value="{{ language.code }}"
+                    {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <button type="submit">{% trans "Set language" %}</button>
+</form>

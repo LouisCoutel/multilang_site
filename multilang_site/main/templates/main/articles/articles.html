@@ -1,22 +1,10 @@
-{% load partials %}
 {% load i18n %}
-{% partialdef article_card %}
-<article>
-    <header class="article_header">
-        <h3>{{ article.title }}</h3>
-        <h4>{% trans "Publication date" %}: {{ article.publication_date }}</h4>
-    </header>
-    <section class="content">
-        {{ article.content | safe }}
-    </section>
-</article>
-{% endpartialdef %}
 <section class="articles">
     <header class="articles_header">
         <h2>{% trans heading %}</h2>
     </header>
     {% for article in articles %}
-        {% partial article_card %}
+        {% include "./article.html" %}
     {% endfor %}
     <footer class="articles_footer"
             hx-get="/articles/?page={{ next_page }}"

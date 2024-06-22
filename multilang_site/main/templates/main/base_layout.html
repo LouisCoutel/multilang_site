@@ -16,33 +16,9 @@
     </head>
     <body>
         <header>
-            <section>
-                <form hx-get="/search/"
-                      hx-params="query"
-                      hx-target="main"
-                      hx-swap="innerHTML"
-                      hx-push-url="true">
-                    {% csrf_token %}
-                    <label for="query">{% trans "Search articles" %}:</label>
-                    <input type="search" id="query" name="query" />
-                    <button type="submit">{% trans "Launch search" %}</button>
-                </form>
-                <form hx-post="/i18n/setlang/">
-                    {% csrf_token %}
-                    <input inert name="next" type="hidden" value="/main/">
-                    <label for="language">
-                        {% trans "Select language" %}
-                        <select name="language" id="language">
-                            {% for language in languages %}
-                                <option value="{{ language.code }}"
-                                        {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
-                                    {{ language.name_local }} ({{ language.code }})
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </label>
-                    <button type="submit">{% trans "Set" %}</button>
-                </form>
+            <section class="utils">
+                {% include "./search_form.html" %}
+                {% include "./setlang_form.html" %}
             </section>
         </header>
         <main id="main"

@@ -1,0 +1,14 @@
+{% load i18n %}
+<form hx-get="/search/"
+      hx-params="query"
+      hx-target="main"
+      hx-swap="innerHTML"
+      hx-push-url="true">
+    {% csrf_token %}
+    <label hidden for="query">{% trans "Search articles" %}:</label>
+    <input 
+           type="search"
+           id="query"
+           name="query" />
+    <button type="submit">{% trans "Launch search" %}</button>
+</form>

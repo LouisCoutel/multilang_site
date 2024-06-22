@@ -1,0 +1,10 @@
+{% load i18n %}
+<article>
+    <header class="article_header">
+        <h3>{{ article.title }}</h3>
+        <h4>{% trans "Publication date" %}: {{ article.publication_date }}</h4>
+    </header>
+    <section class="content">
+        {{ article.content | safe }}
+    </section>
+</article>
