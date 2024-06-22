@@ -1,7 +1,8 @@
 """ Model definitions """
-
+from pgvector.django import VectorField
 from django.db import models
 from django.utils.translation import gettext as _
+from pgvector.django import HnswIndex
 
 
 class Article(models.Model):
@@ -17,7 +18,19 @@ class Article(models.Model):
     content = models.TextField(verbose_name=_("content"))
     publication_date = models.DateField(verbose_name=_("publication_date"),
                                         auto_now_add=True)
+    embedding = VectorField(
+        dimensions=1536
+    )
 
     class Meta:
         verbose_name = _("article")
         verbose_name_plural = _("articles")
+        indexes = [
+            HnswIndex(
+                name="gpt_vectors_index",
+                fields=["embedding"],
+                m=10,
+                ef_construction=24,
+                opclasses=["vector_cosine_ops"],
+            )
+        ]

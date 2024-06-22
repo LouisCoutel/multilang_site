@@ -42,7 +42,7 @@ def generate_data(prompt_word: str):
             {"role": "system",
              "content": system_prompt},
             {"role": "user",
-             "content": f"Write a blog post based on the following title: {title}, wrap all the paragraphs and lists in appropriate HTML elements. If you use headings, only '<h5>' or lower are allowed. Don't include the title and don't wrap the final result in any element."}
+             "content": f"Write a blog post based on the following title: {title}"}
         ]
     )
 
@@ -66,13 +66,21 @@ def generate_data(prompt_word: str):
             {"role": "system",
              "content": system_prompt},
             {"role": "user",
-             "content": f"Translate the following blog post in french: {content}, wrap all the paragraphs and lists in appropriate HTML elements. If you use headings, only '<h5>' or lower are allowed. Don't include the title and don't wrap the final result in any element."}
+             "content": f"Translate the following blog post in french: {content}"}
         ]
     )
 
     content_fr = completion_3.choices[0].message.content
 
-    return title, content, title_fr, content_fr
+    text = title + " " + content
+    embedding = get_embedding(text)
+
+    return title, content, title_fr, content_fr, embedding
+
+
+def get_embedding(text, model="text-embedding-3-small"):
+    text = text.replace("\n", " ")
+    return client.embeddings.create(input=[text], model=model).data[0].embedding
 
 
 class Command(BaseCommand):
@@ -99,10 +107,11 @@ class Command(BaseCommand):
 
         for a in range(n_articles):
             prompt_word = fake.word()
-            title, content, title_fr, content_fr = generate_data(prompt_word)
+            title, content, title_fr, content_fr, embedding = generate_data(
+                prompt_word)
 
             Article.objects.create(
-                title=title, title_fr=title_fr,  content=content, content_fr=content_fr)
+                title=title, title_fr=title_fr,  content=content, content_fr=content_fr, embedding=embedding)
 
             self.stdout.write(
                 self.style.SUCCESS("Database seeding completed."))
