@@ -1,4 +1,5 @@
 """ View declarations """
+from main.gpt_client import distance_search
 from django.shortcuts import render
 from django.utils import translation
 from main.models import Article
@@ -49,7 +50,7 @@ class ArticlesView(View):
         return render(request, "main/articles/articles.html", context)
 
 
-def search(request ):
+def search(request):
     """ Return search results """
 
     query = request.GET.get("query")
@@ -57,8 +58,7 @@ def search(request ):
         context = {"view": f"/search?query={query}"}
         return render(request, "main/base_layout.html", context)
 
-    articles = Article.objects.filter(title__icontains=query)
-
+    articles = distance_search(query)
     context = {"articles": articles, "heading": f"Results for '{query}'"}
 
     res = render(request, "main/articles/articles.html", context)
