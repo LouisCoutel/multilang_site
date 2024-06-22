@@ -19,10 +19,11 @@ from django.contrib import admin
 from django.urls import include, path
 from main import views
 
-urlpatterns = [path('i18n/', include("django.conf.urls.i18n"))]
+urlpatterns = [path('i18n/', include("django.conf.urls.i18n")),
+               path('search/', views.search)]
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('main/', views.base),
-    path('articles/', views.ArticlesView.as_view())
+    path('articles/', views.ArticlesView.as_view()),
 )
