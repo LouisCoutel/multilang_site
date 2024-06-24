@@ -1,14 +1,21 @@
-""" View declarations """
-from main.gpt_client import distance_search
+""" Articles views """
+
+from django.db.models import QuerySet
 from django.shortcuts import render
 from django.utils import translation
 from main.models import Article
 from django.views.generic import View
 from django_htmx.http import reswap
+from main.assistant import distance_search
 
 
 def base(request):
-    """ View returning the base layout of the app """
+    """ View returning the base layout of the app and loading the articles view, used as a default.
+
+    Returns:
+        render (HttpResponse): rendered base layout with 'articles' view URL in context.
+    """
+
     context = {"view": "/articles?page=1"}
     return render(request, "main/base_layout.html", context=context)
 
@@ -17,7 +24,13 @@ class ArticlesView(View):
     """ Article views depending on request type """
 
     def get(self, request):
-        """ Response to a GET request """
+        """ Response to a GET request.
+        Checks if request was triggered by HTMX, if not return base_layout, allowing full page refreshes.
+
+        Returns:
+            render_0 (HttpResponse): rendered base_layout with 'articles' view in context.
+            render_1 (HttpResponse): rendered articles template.
+        """
 
         if not request.htmx:
             return render(request, "main/base_layout.html", context={"view": "/articles?page=1"})
@@ -32,16 +45,16 @@ class ArticlesView(View):
         articles_len: int = Article.objects.count()
 
         if first_article >= articles_len:
-            response = render(request, "main/articles/reached_end.html")
-            reswap(response, "outerHTML")
+            res = render(request, "main/articles/reached_end.html")
+            reswap(res, "outerHTML")
 
-            return response
+            return res
 
         last_article: int = (page * 10) if page else 10
         last_article = last_article if last_article <= articles_len else (
             articles_len)
 
-        articles: list[Article] = Article.objects.order_by(
+        articles: QuerySet = Article.objects.order_by(
             "-publication_date")[first_article:last_article]
 
         context = {"articles": articles,
@@ -51,16 +64,23 @@ class ArticlesView(View):
 
 
 def search(request):
-    """ Return search results """
+    """ Return search results.
 
-    query = request.GET.get("query")
+    Returns:
+        res (HttpResponse): rendered articles template and URL params.
+        render (HttpResponse): rendered base layout with 'search' view in context.
+    """
+
+    query: str = request.GET.get("query")
+
     if not request.htmx:
         context = {"view": f"/search?query={query}"}
         return render(request, "main/base_layout.html", context)
 
-    articles = distance_search(query)
+    articles: QuerySet = distance_search(query)
     context = {"articles": articles, "heading": f"Results for '{query}'"}
 
     res = render(request, "main/articles/articles.html", context)
     res['HX-Push-Url'] = f"/search/?query={query}"
+    
     return res

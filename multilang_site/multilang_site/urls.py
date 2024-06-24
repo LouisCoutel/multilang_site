@@ -17,13 +17,14 @@ Including another URLconf
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path
-from main import views
+from main.views import article_views, assistant_views
 
 urlpatterns = [path('i18n/', include("django.conf.urls.i18n")),
-               path('search/', views.search)]
+               ]
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
-    path('main/', views.base),
-    path('articles/', views.ArticlesView.as_view()),
+    path('main/', article_views.base),
+    path('articles/', article_views.ArticlesView.as_view()),
+    path('search/', article_views.search)
 )
