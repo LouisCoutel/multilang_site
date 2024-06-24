@@ -1,12 +1,12 @@
 """ Chatbot views declarations """
 
 from django.http import StreamingHttpResponse
-from main.assistant import client, stream_to_template
+from main.assistant import client, create_assistant, stream_to_template
 from django.shortcuts import render
 
 
 def chat_window(request):
-
+    create_assistant(request)
     thread = client.beta.threads.create()
     return render(request, "main/chatbot/chatbot.html", context={"thread_id": thread.id})
 

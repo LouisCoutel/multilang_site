@@ -22,14 +22,13 @@ from main.views import article_views, assistant_views
 
 # HTMX doesn't play nice with locale URLs when submitting post requests
 urlpatterns = [path('i18n/', include("django.conf.urls.i18n")),
-               path('chat/send_message/', assistant_views.send_message),
-               path("chat/messages/", assistant_views.receive_messages),
-               ]
+               path('chat/send_message/', assistant_views.send_message),]
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('main/', article_views.base),
     path('articles/', article_views.ArticlesView.as_view()),
     path("chat/", assistant_views.chat_window),
+    path("chat/messages/", assistant_views.receive_messages),
     path('search/', article_views.search)
 )
