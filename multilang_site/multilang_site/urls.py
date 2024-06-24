@@ -14,17 +14,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path
 from main.views import article_views, assistant_views
 
+# HTMX doesn't play nice with locale URLs when submitting post requests
 urlpatterns = [path('i18n/', include("django.conf.urls.i18n")),
+               path('chat/send_message/', assistant_views.send_message),
+               path("chat/messages/", assistant_views.receive_messages),
                ]
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('main/', article_views.base),
     path('articles/', article_views.ArticlesView.as_view()),
+    path("chat/", assistant_views.chat_window),
     path('search/', article_views.search)
 )

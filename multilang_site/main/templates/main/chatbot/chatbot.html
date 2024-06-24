@@ -1,0 +1,28 @@
+{% load i18n %}
+<section class="chatbot">
+    <section class="messages"
+             hx-get="/chat/messages"
+             hx-swap="beforeend transition:true scroll:bottom"
+             hx-trigger="load once, htmx:afterRequest from:#send"
+             hx-include="[id='thread_id']"
+             hx-params="thread_id"
+             hx-push-url="false"
+             hx-indicator="#typing">
+        <span id="typing" class="loader htmx-indicator"></span>
+    </section>
+    <section class="interface">
+        <form id="send"
+              hx-post="/chat/send_message/"
+              hx-target=".messages"
+              hx-swap="beforeend transition:true scroll:bottom"
+              hx-push-url="false">
+            {% csrf_token %}
+            <input type="text" hidden id="thread_id" name="thread_id" value={{ thread_id }} />
+            <label hidden for="user-input">{% trans "Your message" %}:</label>
+            <textarea id="user-input"
+                      name="user-input"
+                      placeholder="{% trans "Rédigez une question ou une requête ici" %}"></textarea>
+            <button type="submit">{% trans "Send" %}</button>
+        </form>
+    </section>
+</section>
