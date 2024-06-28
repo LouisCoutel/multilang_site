@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-17 20:03+0200\n"
+"POT-Creation-Date: 2024-06-28 11:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,36 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:16
+#: models.py:17
 msgid "title"
 msgstr "titre"
 
-#: models.py:17
+#: models.py:18
 msgid "content"
 msgstr "contenu"
 
-#: models.py:18
+#: models.py:19
 msgid "publication_date"
 msgstr "date_publication"
 
-#: models.py:22
+#: models.py:26
 msgid "article"
 msgstr "article"
 
-#: models.py:23
+#: models.py:27
 msgid "articles"
 msgstr "articles"
 
-#: templates/main/articles/articles.html:7
+#: templates/main/articles/article.html:5
+#: templates/main/articles/article_card.html:5
 msgid "Publication date"
 msgstr "Date de publication"
 
-#: templates/main/articles/articles.html:16
-msgid "Latest articles"
-msgstr "Derniers articles"
+#: templates/main/articles/article.html:11
+msgid "Similar articles"
+msgstr "Articles similaires"
 
-#: templates/main/articles/articles.html:26
+#: templates/main/articles/articles.html:14
 msgid "Load more articles"
 msgstr "Charger plus d'articles"
 
@@ -53,14 +54,49 @@ msgstr "Charger plus d'articles"
 msgid "No more articles to load"
 msgstr "Tout les articles ont été chargés"
 
-#: templates/main/base_layout.html:9
-msgid "Online publishing platform with multiple languages support and I.A features"
-msgstr "Plateforme de blog supportant plusieurs langues et intégrant des fonctionnalités basées sur l'I.A"
+#: templates/main/articles/read_button.html:8
+msgid "Read"
+msgstr "Lire"
 
-#: templates/main/base_layout.html:20
-msgid "Select language"
-msgstr "Sélectionnez la langue"
+#: templates/main/assistant/assistant.html:31
+msgid "Toggle window"
+msgstr "Afficher/Masquer"
 
-#: templates/main/base_layout.html:32
+#: templates/main/assistant/interface.html:10
+msgid "Your message"
+msgstr "Votre message"
+
+#: templates/main/assistant/interface.html:13
+msgid "Write your question or request here"
+msgstr "Rédigez votre question ou requête ici"
+
+#: templates/main/assistant/interface.html:14
+msgid "Send"
+msgstr "Envoyer"
+
+#: templates/main/base_layout.html:12
+msgid ""
+"Online publishing platform with multiple languages support and I.A features"
+msgstr ""
+"Plateforme de blog supportant plusieurs langues et intégrant des "
+"fonctionnalités basées sur l'I.A"
+
+#: templates/main/open_assistant.html:3
+msgid "Open assistant"
+msgstr "Ouvrir l'assistant"
+
+#: templates/main/search_form.html:8
+msgid "Search articles"
+msgstr "Rechercher des articles"
+
+#: templates/main/search_form.html:13
+msgid "Launch search"
+msgstr "Lancer la recherche"
+
+#: templates/main/setlang_form.html:5
+msgid "Set language"
+msgstr "Sélectionner la langue"
+
+#: templates/main/setlang_form.html:14
 msgid "Set"
 msgstr "Sélectionner"

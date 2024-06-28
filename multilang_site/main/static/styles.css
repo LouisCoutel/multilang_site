@@ -23,102 +23,123 @@ h6 {
   all: unset;
   margin-bottom: 1rem;
   font-family: Urbanist, sans-serif;
+  line-height: 1.3;
 }
 
 h1 {
-  font-size: 3.815rem;
+  font-size: 2.986rem;
 }
 
 h2 {
-  font-size: 3.052rem;
+  font-size: 1.488rem;
 }
 
 h3 {
-  font-size: 2.441rem;
+  font-size: 2.074rem;
 }
 
 h4 {
-  font-size: 1.953rem;
+  font-size: 1.728rem;
 }
 
 h5 {
-  font-size: 1.563rem;
+  font-size: 1.44rem;
 }
 
 h6 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 
 body {
   background: var(--bg-gradient);
 }
 
-main {
-  margin-top: 80px;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-
-body > header {
+body > header,
+body > footer {
   position: fixed;
-  top: 0;
   left: 0;
   right: 0;
   background-color: white;
   z-index: 999;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: right;
-  filter: drop-shadow(0px 2px 2px #cfd7c7);
+  gap: 0.5rem;
 }
 
-button.open-assistant {
-  background-color: var(--dark-blue);
-  border-color: var(--dark-blue);
-  color: white;
-  transition: all 200ms ease-in-out;
+body > header {
+  top: 0;
+  filter: drop-shadow(0px 2px 2px gray);
 }
 
-button.open-assistant:hover {
-  background-color: white;
-  color: var(--dark-blue);
+main {
+  margin: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  justify-content: center;
+  align-items: center;
+}
+
+body > footer {
+  bottom: 0;
+  filter: drop-shadow(0px -1px 2px gray);
+}
+
+section {
+  display: flex;
+  gap: 0.5rem;
 }
 
 p {
   all: unset;
   margin-bottom: 0.5rem;
-}
-
-p,
-li {
+  line-height: 1.4;
   max-width: 75ch;
 }
-
+ul {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
 li {
+  max-width: 65ch;
   margin-bottom: 1rem;
 }
 
 button {
   font-size: 1em;
   transition: all 200ms ease-in-out;
+  width: fit-content;
 }
 
-button[type="submit"] {
+button:focus {
+  animation: ping 300ms ease-in-out 1;
+}
+
+button.ok {
   color: white;
   background-color: var(--ok-green);
   border-color: var(--ok-green);
 }
 
-button[type="submit"]:hover {
+button.ok:hover {
   color: var(--ok-green);
   background-color: white;
   border-color: var(--ok-green);
   cursor: pointer;
+}
+
+button.neutral {
+  background-color: var(--dark-blue);
+  border-color: var(--dark-blue);
+  color: white;
+  transition: all 200ms ease-in-out;
+}
+
+button.neutral:hover {
+  background-color: white;
+  color: var(--dark-blue);
 }
 
 button,
@@ -139,7 +160,7 @@ select {
 
 .utils {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .utils > form {
@@ -148,188 +169,17 @@ select {
   gap: 0.5rem;
 }
 
-.articles {
-  display: flex;
-  width: 100ch;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2em;
-}
-
-.articles_footer,
-article,
-.articles_header {
-  background-color: white;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
-  filter: drop-shadow(0px 4px 6px #343434);
-}
-
-article {
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: column;
-}
-
-.article_header {
-  display: flex;
-  flex-direction: column;
-}
-
-article > .content {
-  display: flex;
-  flex-direction: column;
-}
-
-.articles_footer {
-  font-size: 1.563rem;
-}
-
-section.chatbot {
-  position: fixed;
-  background-color: white;
-  top: 10vh;
-  left: 10vw;
-  right: 10vw;
-  display: flex;
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.5rem;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 500ms ease-in-out;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-section.messages {
-  position: relative;
-  width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: end;
-  flex-grow: 1;
-  background-color: lightblue;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-section.messages.htmx-request {
-  animation: throb 0.2s ease-in-out 0s infinite alternate none;
-}
-
-@keyframes throb {
+@keyframes ping {
   from {
-    filter: saturate(50%);
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(0.98);
+  }
+  80% {
+    transform: scale(1.02);
   }
   to {
-    filter: saturate(300%);
+    transform: scale(1);
   }
-}
-
-.loader {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background-color: #000000;
-  box-shadow:
-    1rem 0 #000000,
-    -1rem 0 #000000;
-  position: absolute;
-  right: 2rem;
-  bottom: 1rem;
-  animation: flash 0.5s ease-out infinite alternate;
-}
-
-@keyframes flash {
-  0% {
-    background-color: #808080;
-    box-shadow:
-      1rem 0 #808080,
-      -1rem 0 #000000;
-  }
-  50% {
-    background-color: #000000;
-    box-shadow:
-      1rem 0 #808080,
-      -1rem 0 #808080;
-  }
-  100% {
-    background-color: #808080;
-    box-shadow:
-      1rem 0 #000000,
-      -1rem 0 #808080;
-  }
-}
-
-.htmx-indicator {
-  opacity: 0;
-  transition: opacity 200ms ease-in;
-}
-
-.htmx-request .htmx-indicator {
-  opacity: 1;
-}
-
-.htmx-request.htmx-indicator {
-  opacity: 1;
-}
-
-
-div.msg {
-  display: flex;
-  width: fit-content;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  text-align: end;
-  filter: drop-shadow(2px 2px 4px light-gray);
-  transition: all 300ms ease-out;
-}
-
-div.msg.htmx-added {
-  opacity: 0;
-  transform: translateX(100%);
-}
-
-div.msg.assistant {
-  background-color: white;
-}
-
-div.msg.user {
-  background-color: var(--dark-blue);
-  color: white;
-}
-
-section.interface {
-  width: 100%;
-  height: fit-content;
-}
-
-.interface > form {
-  display: flex;
-  gap: 1rem;
-  height: 4rem;
-  width: 100%;
-}
-
-#user-input {
-  margin: 0;
-  padding: 0.25rem;
-  flex-grow: 1;
-  resize: none;
-  margin: 0;
-  height: 100%;
-  box-sizing: border-box;
-  border-radius: 0.5rem;
-}
-
-.interface > form > button {
-  height: 100%;
-  width: 15%;
-  border-radius: 0.5rem;
 }

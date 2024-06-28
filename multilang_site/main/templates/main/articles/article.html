@@ -1,10 +1,16 @@
 {% load i18n %}
-<article>
+<article class="full">
     <header class="article_header">
         <h3>{{ article.title }}</h3>
         <h4>{% trans "Publication date" %}: {{ article.publication_date }}</h4>
     </header>
     <section class="content">
         {{ article.content | safe }}
+    </section>
+    <section class="similar">
+        <h5>{% trans 'Similar articles' %}:</h5>
+        <ul>
+            {% for similar_article in similar_articles %}<li>{{ similar_article.title }}</li>{% endfor %}
+        </ul>
     </section>
 </article>

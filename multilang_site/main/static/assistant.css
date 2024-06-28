@@ -1,0 +1,166 @@
+section.assistant {
+  background-color: white;
+  height: 30vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 500ms ease-in-out;
+}
+
+section.assistant.collapsed {
+  height: 0vh;
+  opacity: 0;
+}
+
+section.assistant.hidden {
+  visibility: hidden;
+}
+
+section.messages {
+  position: relative;
+  width: calc(100% - 1rem);
+  height: calc(100% - 1rem);
+  flex-direction: column;
+  align-items: end;
+  flex-grow: 1;
+  background-color: lightblue;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+section.messages.htmx-request {
+  animation: throb 0.2s ease-in-out 0s infinite alternate none;
+}
+
+.loader {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #000000;
+  box-shadow:
+    1rem 0 #000000,
+    -1rem 0 #000000;
+  position: absolute;
+  right: 2rem;
+  bottom: 1rem;
+  animation: flash 0.5s ease-out infinite alternate;
+}
+
+.htmx-indicator {
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
+
+.htmx-request .htmx-indicator {
+  opacity: 1;
+}
+
+.htmx-request.htmx-indicator {
+  opacity: 1;
+}
+
+div.msg {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  text-align: end;
+  filter: drop-shadow(2px 2px 4px light-gray);
+  transition: all 300ms ease-out;
+}
+
+div.msg.htmx-added {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+div.msg.assistant {
+  background-color: white;
+}
+
+div.msg.user {
+  background-color: var(--dark-blue);
+  color: white;
+}
+
+section.interface {
+  width: 100%;
+  height: fit-content;
+}
+
+.interface > form {
+  display: flex;
+  gap: 1rem;
+  height: 4rem;
+  width: 100%;
+}
+
+#user-input {
+  margin: 0;
+  padding: 0.25rem;
+  flex-grow: 1;
+  resize: none;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+}
+
+#send-message {
+  height: 100%;
+  width: 15%;
+  border-radius: 0.5rem;
+}
+
+#collapse-assistant {
+  height: min-content;
+  position: absolute;
+  top: -2.5rem;
+  right: 0.5rem;
+  opacity: 0.3;
+}
+
+#collapse-assistant:hover {
+  opacity: 1;
+}
+
+#collapse-assistant.collapsed {
+  position: static;
+  opacity: 1;
+}
+
+@keyframes throb {
+  from {
+    filter: saturate(50%);
+  }
+  to {
+    filter: saturate(300%);
+  }
+}
+
+@keyframes flash {
+  0% {
+    background-color: #808080;
+    box-shadow:
+      1rem 0 #808080,
+      -1rem 0 #000000;
+  }
+  50% {
+    background-color: #000000;
+    box-shadow:
+      1rem 0 #808080,
+      -1rem 0 #808080;
+  }
+  100% {
+    background-color: #808080;
+    box-shadow:
+      1rem 0 #000000,
+      -1rem 0 #808080;
+  }
+}

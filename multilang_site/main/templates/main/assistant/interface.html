@@ -1,0 +1,16 @@
+{% load i18n %}
+<section class="interface">
+    <form id="send"
+          hx-post="/chat/send_message/"
+          hx-target=".messages"
+          hx-swap="beforeend transition:true scroll:bottom"
+          hx-push-url="false">
+        {% csrf_token %}
+        <input type="text" hidden id="thread_id" name="thread_id" value={{ thread_id }} />
+        <label hidden for="user-input">{% trans "Your message" %}:</label>
+        <textarea id="user-input"
+                  name="user-input"
+                  placeholder="{% trans 'Write your question or request here' %}"></textarea>
+        <button id="send-message" class="ok" type="submit">{% trans "Send" %}</button>
+    </form>
+</section>

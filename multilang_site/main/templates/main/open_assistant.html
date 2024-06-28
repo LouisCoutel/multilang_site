@@ -1,2 +1,3 @@
-<button class="open-assistant" arial-label="open IA assistant"
-hx-get="/chat/" hx-target="main" hx-swap="beforeend" hx-push-url="false">Open assistant</button>
+{% load i18n %}
+<button class="neutral" arial-label="open IA assistant"
+	hx-get="/chat/" hx-swap="outerHTML" hx-push-url="false">{% trans "Open assistant" %}</button>

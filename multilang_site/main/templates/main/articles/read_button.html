@@ -1,0 +1,8 @@
+{% load i18n %}
+<button class="read-more neutral"
+        aria-label="go to full article"
+        hx-get="/article/?id={{ article.id }}"
+        hx-swap="innerHTML"
+        hx-target="main"
+        hx-trigger="click, click from:.content"
+        hx-push-url="true">{% trans "Read" %}</button>
