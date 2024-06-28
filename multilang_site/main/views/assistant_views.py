@@ -16,6 +16,14 @@ def chat_window(request):
     return render(request, "main/assistant/assistant.html", context={"thread_id": request.session["thread_id"]})
 
 
+def get_ids(request):
+
+    a = request.session["assistant_id"]
+    t = request.session["thread_id"]
+
+    return (a, t)
+
+
 def receive_messages(request):
     """ View returning the chat window and initialiazing a thread.
 
@@ -23,10 +31,11 @@ def receive_messages(request):
         render (HttpResponse): rendered base layout with 'assistant' view in context.
         StreamingHttpResponse: stream of assistant template renderings, with actualized context.
     """
-    thread_id = request.session["thread_id"]
-    assistant_id = request.session["assistant_id"]
+
+    a, t = get_ids(request)
+
     return StreamingHttpResponse(stream_to_template(
-        assistant_id, thread_id, template_name="main/assistant/message.html"))
+        assistant_id=a, thread_id=t, template_name="main/assistant/message.html"))
 
 
 def send_message(request):
@@ -37,13 +46,12 @@ def send_message(request):
     """
 
     input = request.POST.get("user-input")
-
-    thread_id = request.POST.get("thread_id")
+    a, t = get_ids(request)
 
     client.beta.threads.messages.create(
-        thread_id,
+        thread_id=t,
         role="user",
         content=input,
     )
 
-    return render(request, template_name="main/assistant/message.html", context={"role": "user", "content": input})
+    return StreamingHttpResponse(stream_to_template(assistant_id=a, thread_id=t, template_name="main/assistant/message.html"))
