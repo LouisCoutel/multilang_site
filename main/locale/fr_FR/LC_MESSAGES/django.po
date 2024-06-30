@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-28 11:58+0200\n"
+"POT-Creation-Date: 2024-07-01 00:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:17
+#: models.py:18
 msgid "title"
 msgstr "titre"
 
-#: models.py:18
+#: models.py:19
 msgid "content"
 msgstr "contenu"
 
-#: models.py:19
+#: models.py:20
 msgid "publication_date"
 msgstr "date_publication"
 
-#: models.py:26
+#: models.py:28
 msgid "article"
 msgstr "article"
 
-#: models.py:27
+#: models.py:29
 msgid "articles"
 msgstr "articles"
 
@@ -46,12 +46,17 @@ msgstr "Date de publication"
 msgid "Similar articles"
 msgstr "Articles similaires"
 
-#: templates/main/articles/articles.html:14
-msgid "Latest articles"
-msgstr "Derniers articles"
-
+#: templates/main/articles/articles.html:12
 msgid "Load more articles"
 msgstr "Charger plus d'articles"
+
+#: templates/main/articles/header.html:6
+msgid "Results for "
+msgstr "Résultats pour"
+
+#: templates/main/articles/header.html:8
+msgid "Latest articles"
+msgstr "Derniers articles"
 
 #: templates/main/articles/reached_end.html:3
 msgid "No more articles to load"
@@ -61,19 +66,23 @@ msgstr "Tout les articles ont été chargés"
 msgid "Read"
 msgstr "Lire"
 
-#: templates/main/assistant/assistant.html:31
+#: templates/main/assistant/assistant.html:11
 msgid "Toggle window"
 msgstr "Afficher/Masquer"
 
-#: templates/main/assistant/interface.html:10
+#: templates/main/assistant/assistant.html:11
+msgid "Hide"
+msgstr "Masquer"
+
+#: templates/main/assistant/interface.html:5
 msgid "Your message"
 msgstr "Votre message"
 
-#: templates/main/assistant/interface.html:13
+#: templates/main/assistant/interface.html:9
 msgid "Write your question or request here"
 msgstr "Rédigez votre question ou requête ici"
 
-#: templates/main/assistant/interface.html:14
+#: templates/main/assistant/interface.html:10
 msgid "Send"
 msgstr "Envoyer"
 
@@ -84,7 +93,7 @@ msgstr ""
 "Plateforme de blog supportant plusieurs langues et intégrant des "
 "fonctionnalités basées sur l'I.A"
 
-#: templates/main/open_assistant.html:3
+#: templates/main/open_assistant.html:8
 msgid "Open assistant"
 msgstr "Ouvrir l'assistant"
 

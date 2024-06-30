@@ -1,5 +1,5 @@
 {% load i18n %}
-<form action ="/i18n/set_lang/">
+<form hx-post="/i18n/setlang/" hx-target="main">
     {% csrf_token %}
     <input inert name="next" type="hidden" value="">
     <label hidden for="language">{% trans "Set language" %}:</label>
