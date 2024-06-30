@@ -1,11 +1,13 @@
-from typing import List
-from django.core.management.base import BaseCommand
+""" Module for custom command 'seed_data', used to generate realistic dummy data with gpt-4o. """from django.core.management.base import BaseCommand
+
 from faker import Faker
 from openai import OpenAI
 from faker.providers import lorem
 import dotenv
 from main.models import Article
 from main.management.commands.commands_exceptions import GeneratingDataError
+from main.assistant_utils import get_embedding
+
 dotenv.load_dotenv()
 client = OpenAI()
 
@@ -78,13 +80,9 @@ def generate_data(prompt_word: str) -> tuple:
         embedding = get_embedding(text)
 
         return (title, content, title_fr, content_fr, embedding)
+
     raise GeneratingDataError(
         {"title": title, "content": content, "title_fr": title_fr, "content_fr": content_fr})
-
-
-def get_embedding(text, model="text-embedding-3-small") -> List[float]:
-    text = text.replace("\n", " ")
-    return client.embeddings.create(input=[text], model=model).data[0].embedding
 
 
 class Command(BaseCommand):
@@ -106,6 +104,7 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS("Seeding database..."))
 
+        # On génère un mot au hasard avec Faker
         fake = Faker()
         fake.add_provider(lorem)
 

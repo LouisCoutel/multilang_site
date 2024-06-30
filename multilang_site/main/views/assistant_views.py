@@ -1,9 +1,9 @@
-""" Chatbot views declarations """
+""" Chatbot views """
 
 from django.shortcuts import render
 
 
 def chat_window(request):
-    """ Open assistant windows. """
+    """ Open assistant window. """
 
     return render(request, "main/assistant/assistant.html")

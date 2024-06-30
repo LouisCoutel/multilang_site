@@ -1,4 +1,4 @@
-""" Model translator """
+""" Model translator, creates clones for each field, in a different language. """
 
 from modeltranslation.translator import translator, TranslationOptions
 from main.models import Article

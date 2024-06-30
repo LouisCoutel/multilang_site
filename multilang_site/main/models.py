@@ -6,12 +6,13 @@ from pgvector.django import HnswIndex
 
 
 class Article(models.Model):
-    """ Model for a blog article
+    """ Model for a blog article.
+
     Attributes:
         title (str): Article title. Max length: 200 characters.
         content (str): Article main body of text.
         publication_date (Date): Article publication date.
-
+        embedding: vector embedding.
     """
 
     title = models.CharField(verbose_name=_("title"), max_length=200)
@@ -22,6 +23,7 @@ class Article(models.Model):
         dimensions=1536
     )
 
+    # Meta-données permettant éventuellement d'accéder aux champs via le nom traduit ainsi quà un index pour la recherche par similarité.
     class Meta:
         verbose_name = _("article")
         verbose_name_plural = _("articles")

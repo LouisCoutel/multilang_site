@@ -1,3 +1,5 @@
+""" Various utility functions for using and interacting with an OpenAI assistant"""
+
 from typing import Tuple
 from django.db.models import QuerySet
 from django.utils.html import json
@@ -8,16 +10,13 @@ from main.models import Article
 client = OpenAI()
 
 
-class AssistantError(Exception):
-    def __init__(self):
-        super().__init__()
-
-
 def create_assistant(lang) -> Tuple:
     """ Create an OpenAI assistant and set its id in session for retrieval.
 
     Args:
-        request (HttpRequest): request obj, needed for accessing the section.
+        lang (str): current language code.
+    Returns:
+        assistant, thread (tuple): assistant and thread instances packed in a tuple.
     """
 
     assistant = client.beta.assistants.create(
@@ -60,6 +59,9 @@ def get_embedding(text: str, model="text-embedding-3-small"):
     Args:
         text(str): text to generate an embedding for .
         model(str): name of OpenAI model to use.
+
+    Returns:
+        vector embedding
     """
 
     text = text.replace("\n", " ")
@@ -67,14 +69,14 @@ def get_embedding(text: str, model="text-embedding-3-small"):
     return client.embeddings.create(input=[text], model=model).data[0].embedding
 
 
-def distance_search(article_desc: str):
+def distance_search(article_desc: str) -> QuerySet:
     """ Run a similarity search in database with provided article description.
 
     Args:
         article_desc(str): user input describing what they want.
 
     Returns:
-        matching_articles(QuerySet): articles that best match the provided description/request.
+        matching_articles (QuerySet): articles that best match the provided description/request.
     """
 
     embedding = get_embedding(article_desc, model='text-embedding-3-small')
@@ -86,8 +88,14 @@ def distance_search(article_desc: str):
     return matching_articles
 
 
-def process_req_action(event):
-    """ Trigger search on event, generate tool outputs. """
+def process_req_action(event) -> list:
+    """ Trigger search on event, generate tool outputs.
+
+        Args:
+            event: current OpenAI event object. 
+
+        Returns:
+            tool_outputs (list): JSON formatted outputs of called functions. """
 
     tool_outputs = []
 

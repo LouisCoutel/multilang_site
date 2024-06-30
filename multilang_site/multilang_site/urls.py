@@ -28,7 +28,7 @@ urlpatterns = [path('i18n/', include("django.conf.urls.i18n")),
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', article_views.base),
-    path('articles/', article_views.ArticlesView.as_view(), name="articles"),
+    path('articles/', article_views.articles),
     path('article/', article_views.article),
     path("chat/", assistant_views.chat_window),
     path('search/', article_views.search)
