@@ -31,6 +31,10 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS",
                           "localhost,127.0.0.1,[::1]").split(",")
 
 CSRF_TRUSTED_ORIGINS = ['https://realistic-katey-lcoutel-a5c970a4.koyeb.app']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 
 
 # Application definition

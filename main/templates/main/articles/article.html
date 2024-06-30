@@ -10,7 +10,7 @@
     <section class="similar">
         <h5>{% trans 'Similar articles' %}:</h5>
         <ul>
-			{% for similar_article in similar_articles %}<li><a href="/article/?id={similar_article.id}">{{ similar_article.title }}</a></li>{% endfor %}
+			{% for similar_article in similar_articles %}<li><a href="/article/?id={{similar_article.id}}">{{ similar_article.title }}</a></li>{% endfor %}
         </ul>
     </section>
 </article>
