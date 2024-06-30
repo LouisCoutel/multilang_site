@@ -1,4 +1,5 @@
-""" Module for custom command 'seed_data', used to generate realistic dummy data with gpt-4o. """from django.core.management.base import BaseCommand
+""" Module for custom command 'seed_data', used to generate realistic dummy data with gpt-4o. """
+from django.core.management.base import BaseCommand
 
 from faker import Faker
 from openai import OpenAI
