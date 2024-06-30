@@ -47,6 +47,9 @@ msgid "Similar articles"
 msgstr "Articles similaires"
 
 #: templates/main/articles/articles.html:14
+msgid "Latest articles"
+msgstr "Derniers articles"
+
 msgid "Load more articles"
 msgstr "Charger plus d'articles"
 
