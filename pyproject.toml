@@ -19,6 +19,8 @@ psycopg2 = "^2.9.9"
 django-extensions = "^3.2.3"
 channels = {extras = ["daphne"], version = "^4.1.0"}
 markdown = "^3.6"
+gunicorn = "^22.0.0"
+whitenoise = "^6.7.0"
 
 
 [build-system]
