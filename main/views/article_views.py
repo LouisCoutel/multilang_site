@@ -20,7 +20,7 @@ def base(request):
     return render(request, "main/base_layout.html", context=context)
 
 
-def articles(self, request):
+def articles( request):
     """ Response to a GET request.
 
     Checks if request was triggered by HTMX, if not return base_layout, allowing full page refreshes.
@@ -33,7 +33,7 @@ def articles(self, request):
     # On vérifie si la requête provient d'HTMX ou d'un rafraichissement de la page
     # Si la page est rechargée intégralement, on renvoit 'base_layout'
     if not request.htmx:
-        return render(request, "main/base_layout.html", context={"view": "/articles?page=1"})
+        return render(request, "main/base_layout.html", context={"view": "/articles/?page=1"})
 
     # Petits calculs pour gérer l'indexation différente entre les pages (1) et les listes Python (0).
     page = int(request.GET.get('page', ''))
