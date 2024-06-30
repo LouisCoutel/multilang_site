@@ -6,8 +6,7 @@ from django.utils import translation
 from pgvector.django import CosineDistance
 from main.models import Article
 from django.views.generic import View
-from django_htmx.http import reswap
-from main.assistant import distance_search
+from main.assistant_utils import distance_search
 
 
 def base(request):
@@ -18,14 +17,16 @@ def base(request):
     """
 
     context = {"view": "/articles?page=1"}
+
     return render(request, "main/base_layout.html", context=context)
 
 
 class ArticlesView(View):
-    """ Article views depending on request type """
+    """ View for the article section containing a list of article. """
 
     def get(self, request):
         """ Response to a GET request.
+
         Checks if request was triggered by HTMX, if not return base_layout, allowing full page refreshes.
 
         Returns:
@@ -33,9 +34,12 @@ class ArticlesView(View):
             render_1 (HttpResponse): rendered articles template.
         """
 
+        # On vérifie si la requête provient d'HTMX ou d'un rafraichissement de la page
+        # Si la page est rechargée intégralement, on renvoit 'base_layout'
         if not request.htmx:
             return render(request, "main/base_layout.html", context={"view": "/articles?page=1"})
 
+        # Petits calculs pour gérer l'indexation différente entre les pages (1) et les listes Python (0).
         page = int(request.GET.get('page', ''))
         first_article: int = ((page - 1) * 10) if page > 1 else 0
 
@@ -45,12 +49,6 @@ class ArticlesView(View):
 
         articles_len: int = Article.objects.count()
 
-        if first_article >= articles_len:
-            res = render(request, "main/articles/reached_end.html")
-            reswap(res, "outerHTML")
-
-            return res
-
         last_article: int = (page * 10) if page else 10
         last_article = last_article if last_article <= articles_len else (
             articles_len)
@@ -59,20 +57,27 @@ class ArticlesView(View):
             "-publication_date")[first_article:last_article]
 
         context = {"articles": articles,
-                   "current_page": page, "next_page": (page + 1), "heading": "Latest articles"}
+                   "current_page": page,
+                   "next_page": (page + 1)}
 
+        # S'il n'y à plus d'articles à charger, on l'indique dans le footer
+        if first_article >= articles_len:
+            return render(request, "main/articles/reached_end.html")
+
+        # On renvoit uniquement une liste d'articles à insérer à la suite pour les autres pages
         return render(request, "main/articles/articles.html", context)
 
 
 def article(request):
     """ Full article view. """
-    
+
     article_id = request.GET.get("id")
     article = Article.objects.get(id=article_id)
 
     if not request.htmx:
         return render(request, "main/base_layout.html", context={"view": f"/article/?id={article_id}"})
 
+    # Recherche par similarité dans la BDD
     similar_articles = Article.objects.annotate(
         distance=CosineDistance("embedding", article.embedding)
     ).order_by("distance")[1:6]
@@ -96,7 +101,8 @@ def search(request):
         return render(request, "main/base_layout.html", context)
 
     articles: QuerySet = distance_search(query)
-    context = {"articles": articles, "heading": f"Results for '{query}'"}
+    context = {"articles": articles,
+               "query": query}
 
     res = render(request, "main/articles/articles.html", context)
     res['HX-Push-Url'] = f"/search/?query={query}"

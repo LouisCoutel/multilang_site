@@ -1,0 +1,12 @@
+{% load i18n %}
+{% if current_page == 1 or query %}
+    <header class="articles_header">
+        <h2>
+            {% if query %}
+                {% trans "Results for " %} '{{ query }}'
+            {% else %}
+                {% trans "Latest articles" %}
+            {% endif %}
+        </h2>
+    </header>
+{% endif %}

@@ -1,8 +1,6 @@
 {% load i18n %}
 <section class="articles">
-    <header class="articles_header">
-        <h2>{% trans "Latest articles" %}</h2>
-    </header>
+    {% include "./header.html" %}
     {% for article in articles %}
         {% include "./article_card.html" %}
     {% endfor %}
