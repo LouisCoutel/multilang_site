@@ -1,11 +1,4 @@
 
-    <section class="messages"
-             hx-get="/chat/messages"
-             hx-swap="beforeend transition:true scroll:bottom"
-             hx-trigger="load once, htmx:afterRequest from:#send"
-             hx-include="[id='thread_id']"
-             hx-params="thread_id"
-             hx-push-url="false"
-             hx-indicator="#typing">
+<section id="messages" class="messages" >
         <span id="typing" class="loader htmx-indicator"></span>
-    </section>
+</section>

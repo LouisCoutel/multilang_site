@@ -1,3 +1,11 @@
 {% load i18n %}
+<script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+<section id="assistant-window"
+         class="assistant"
+         hx-ext='ws'
+         ws-connect="/chat/assistant/"
+         hx-target="#messages" />
+{% include './messages.html' %}
+{% include './interface.html' %}
 </section>
-<button id="collapse-assistant" aria-label="{% trans "Toggle window" %}"></button>
+<button id="collapse-assistant" aria-label="{% trans "Toggle window" %}">{% trans "Hide" %}</button>
