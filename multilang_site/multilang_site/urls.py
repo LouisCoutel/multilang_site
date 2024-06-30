@@ -21,11 +21,9 @@ from django.contrib import admin
 from django.urls import include, path
 from main.views import article_views, assistant_views
 
-# HTMX doesn't play nice with locale URLs when submitting post requests
 urlpatterns = [path('i18n/', include("django.conf.urls.i18n")),
                path("jsi18n/", JavaScriptCatalog.as_view(),
-                    name="javascript-catalog"),
-               path('chat/send_message/', assistant_views.send_message),]
+                    name="javascript-catalog")]
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
@@ -33,6 +31,5 @@ urlpatterns += i18n_patterns(
     path('articles/', article_views.ArticlesView.as_view(), name="articles"),
     path('article/', article_views.article),
     path("chat/", assistant_views.chat_window),
-    path("chat/messages/", assistant_views.receive_messages),
     path('search/', article_views.search)
 )
