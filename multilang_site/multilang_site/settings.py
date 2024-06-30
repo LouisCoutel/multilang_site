@@ -99,15 +99,14 @@ LANGUAGES = (
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'multilang_db',
-        'USER': 'admin',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'koyebdb',
+        'USER': 'koyeb-adm',
         'PASSWORD': os.getenv("DB_PWD"),
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'HOST': 'ep-green-union-a2xviqpz.eu-central-1.pg.koyeb.app',
+        'OPTIONS': {'sslmode': 'require'},
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
