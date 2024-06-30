@@ -7,16 +7,21 @@ For more information on this file, see
 https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
 """
 
-from channels.routing import ProtocolTypeRouter, URLRouter
+import logging
 import os
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'multilang_site.settings')
+logging.warning(os.getenv('DJANGO_SETTINGS_MODULE'))
+
+#fmt: off
 from django.core.asgi import get_asgi_application
+#fmt: on
 
 django_asgi_app = get_asgi_application()
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'multilang_site.settings')
 
 
 #fmt: off
+from channels.routing import ProtocolTypeRouter, URLRouter
 from main.routing import websocket_urlpatterns
 #fmt: on
 
