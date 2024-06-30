@@ -34,6 +34,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    'main',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,10 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_htmx',
     'django_extensions',
+    'markdown',
     'modeltranslation',
     'template_partials',
     'pgvector',
-    'main'
 ]
 
 MIDDLEWARE = [
@@ -145,3 +147,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ASGI_APPLICATION = "multilang_site.asgi.application"
