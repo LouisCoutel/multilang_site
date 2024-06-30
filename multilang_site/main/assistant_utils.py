@@ -26,7 +26,7 @@ def create_assistant(lang) -> Tuple:
             You can help users write blog posts, you can also perform searches and return existing articles from the database.",
         instructions=f"Answer in the language corresponding to this code : {lang} unless asked to switch. \
             Keep answers short and to the point. \
-            Format your response in markdown. \
+            Format your response in markdown. Don't use headings larger than h5. \
             Introduce yourself to the user and explain what you can do.",
         tools=[{"type": "function",
                 "function": {

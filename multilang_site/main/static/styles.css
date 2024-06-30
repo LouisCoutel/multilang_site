@@ -31,7 +31,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.488rem;
+  font-size: 2.488rem;
 }
 
 h3 {
@@ -74,6 +74,7 @@ body > header {
 
 main {
   margin: 4rem 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -145,14 +146,14 @@ button.neutral:hover {
 button,
 select,
 input[type="search"],
-textarea {
+input[type="text"] {
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
   border: 2px solid;
 }
 
 input[type="search"],
-textarea,
+input[type="text"],
 select {
   font-size: 1em;
   border-color: gray;

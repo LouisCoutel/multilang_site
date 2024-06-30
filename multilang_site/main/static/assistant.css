@@ -1,6 +1,6 @@
 section.assistant {
   background-color: white;
-  height: 30vh;
+  height: 60vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -20,9 +20,11 @@ section.assistant.hidden {
 }
 
 section.messages {
+  resize: vertical;
   position: relative;
   width: calc(100% - 1rem);
-  height: calc(100% - 1rem);
+  height: 50vh;
+  max-height: 80vh;
   flex-direction: column;
   align-items: end;
   flex-grow: 1;
@@ -40,7 +42,7 @@ section.messages.htmx-request {
 .loader {
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 50%;
+  border-radius: 51%;
   background-color: #000000;
   box-shadow:
     1rem 0 #000000,
@@ -68,16 +70,12 @@ div.msg {
   display: flex;
   flex-direction: column;
   width: fit-content;
+  max-width: 75ch;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
-  text-align: end;
   filter: drop-shadow(2px 2px 4px light-gray);
-  transition: all 300ms ease-out;
-}
-
-div.msg.htmx-added {
-  opacity: 0;
   transform: translateX(100%);
+  animation: slide-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 div.msg.assistant {
@@ -96,7 +94,7 @@ section.interface {
 
 .interface > form {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   height: 4rem;
   width: 100%;
 }
@@ -131,7 +129,6 @@ section.interface {
 }
 
 #collapse-assistant.collapsed {
-  position: static;
   opacity: 1;
 }
 
@@ -162,5 +159,14 @@ section.interface {
     box-shadow:
       1rem 0 #000000,
       -1rem 0 #808080;
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

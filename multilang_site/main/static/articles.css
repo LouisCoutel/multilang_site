@@ -18,18 +18,17 @@
   padding: 1rem;
   filter: drop-shadow(0px 4px 6px #343434);
 }
-
 .full,
 .card {
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
+  max-width: 85ch;
 }
 
 .article_header {
   display: flex;
   flex-direction: column;
-  max-width: 75ch;
 }
 
 .similar {
@@ -42,13 +41,12 @@
 }
 .article_header h3 {
   font-weight: 500;
+  font-size: 1.44rem;
+  margin-bottom: 0.25rem;
 }
 
 .article_header h4 {
   font-weight: 300;
-}
-
-.card .article_header h4 {
   font-size: 1rem;
 }
 
