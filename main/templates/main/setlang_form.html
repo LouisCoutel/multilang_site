@@ -1,7 +1,9 @@
 {% load i18n %}
-<form hx-post="/i18n/setlang/" hx-target="main">
+<form hx-post="/i18n/setlang/"
+      hx-target="body"
+      hx-headers="{'Accept': 'text/html'}">
     {% csrf_token %}
-    <input inert name="next" type="hidden" value="">
+    <input inert name="next" type="hidden" value="/">
     <label hidden for="language">{% trans "Set language" %}:</label>
     <select name="language" id="language">
         {% for language in languages %}
